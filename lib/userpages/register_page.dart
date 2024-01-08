@@ -52,6 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
           phoneNumber: _phonenumberController.text,
           userId: _idController.text,
           name: _nameController.text,
+          whichUser: selectedDropdownItem,
         );
       } else {
         showDialog(
@@ -111,6 +112,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 HeaderText(givenText: "Create Account"),
                 SizedBox(
                   height: 50,
+                ),
+                Text("Name"),
+                UserInputField(
+                  userField: _nameController,
+                  ispass: false,
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Text("Email"),
                 UserInputField(

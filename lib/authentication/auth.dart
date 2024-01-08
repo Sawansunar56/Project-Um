@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -25,6 +23,7 @@ class AuthMethods {
     required String name,
     required String phoneNumber,
     required String userId,
+    required String whichUser,
   }) async {
     String res = "Some Fault has Occured";
     try {
@@ -32,13 +31,17 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        _firestore.collection('users').doc(cred.user!.uid).set({
+        _firestore.collection(whichUser).doc(cred.user!.uid).set({
           'name': name,
           'uid': cred.user!.uid,
           'email': email,
           'password': password,
           'userId': userId,
           'phoneNumber': phoneNumber,
+          'role': whichUser,
+          'club': "none",
+          'profileImage':
+              "https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"
         });
         res = "success";
       }

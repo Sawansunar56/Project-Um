@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:project_um/screens/primary%20screens/admin_student.dart';
 
 import '../notifications_screen.dart';
 
-class FacultyScreen extends StatelessWidget {
-  const FacultyScreen({super.key});
+class AdminList extends StatelessWidget {
+  const AdminList({super.key});
 
   Stream<QuerySnapshot> getDataStream() {
-    return FirebaseFirestore.instance.collection('Teacher').snapshots();
+    return FirebaseFirestore.instance.collection('Student').snapshots();
   }
 
   @override
@@ -18,7 +19,7 @@ class FacultyScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: const Text("Faculty Information"),
+        title: const Text("Admin Controls"),
         actions: [
           IconButton(
               onPressed: () {
@@ -29,7 +30,7 @@ class FacultyScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
         child: StreamBuilder(
           stream: getDataStream(),
           builder:
@@ -46,13 +47,13 @@ class FacultyScreen extends StatelessWidget {
               );
             }
 
-            final teachers = snapshot.data!.docs;
+            final Students = snapshot.data!.docs;
 
             return ListView.builder(
-              itemCount: teachers.length,
+              itemCount: Students.length,
               itemBuilder: (context, index) {
-                final teacher = teachers[index].data() as Map<String, dynamic>;
-                final teacherId = teachers[index].reference.id;
+                final Student = Students[index].data() as Map<String, dynamic>;
+                final StudentId = Students[index].reference.id;
                 return GestureDetector(
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -71,7 +72,7 @@ class FacultyScreen extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            teacher["name"],
+                            Student["name"],
                             style: TextStyle(fontSize: 20),
                           ),
                         ],
@@ -82,13 +83,14 @@ class FacultyScreen extends StatelessWidget {
                   // subtitle: Text("${product['productDescription']}"),
                   // trailing: Text('${product['productCost']}'),
                   onTap: () {
-                    // navigate to product details page
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: ((context) => ProductDetailsPage(
-                    //         product: product, productId: productId)),
-                    //   ),
-                    // );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: ((context) => AdminStudent(
+                              userData: Student,
+                              userId: StudentId,
+                            )),
+                      ),
+                    );
                   },
                 );
               },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_um/constants/colors.dart';
+import 'package:project_um/screens/secondary%20screens/club_screen.dart';
 import 'package:project_um/screens/secondary%20screens/faculty_screen.dart';
+import 'package:project_um/screens/secondary%20screens/student_board_screen.dart';
 import 'package:project_um/utils/block_image.dart';
 
 import '../notifications_screen.dart';
@@ -9,11 +11,16 @@ class InformationScreen extends StatelessWidget {
   InformationScreen({super.key});
 
   List<List<dynamic>> primaryData = [
-    ["2", "Faculty Information", blueSecondaryColor],
-    ["1", "Student Board Information", orangeSecondaryColor],
-    ["4", "Clubs Information", greenSecondaryColor],
-    ["5", "University Information", yellowSecondaryColor],
-    ["3", "Academic Calendar", redSecondaryColor],
+    ["2", "Faculty Information", blueSecondaryColor, FacultyScreen()],
+    [
+      "1",
+      "Student Board Information",
+      orangeSecondaryColor,
+      StudentBoardScreen()
+    ],
+    ["4", "Clubs Information", greenSecondaryColor, ClubScreen()],
+    ["5", "University Information", yellowSecondaryColor, FacultyScreen()],
+    ["3", "Academic Calendar", redSecondaryColor, FacultyScreen()],
   ];
 
   @override
@@ -41,8 +48,8 @@ class InformationScreen extends StatelessWidget {
             itemBuilder: (BuildContext builder, int index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => FacultyScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => primaryData[index][3]));
                 },
                 child: BlockImage(
                   imageName: primaryData[index][0],

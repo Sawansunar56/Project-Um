@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_um/screens/notifications_screen.dart';
+import 'package:project_um/screens/secondary%20screens/add_annoucements.dart';
 import './screens/primary screens/home_data_screen.dart';
 import './screens/primary screens/sos_screen.dart';
 import './screens/primary screens/buy_sell_screen.dart';
@@ -11,7 +12,7 @@ class Home extends StatefulWidget {
   static final List<Widget> _pages = <Widget>[
     HomeDataScreen(),
     SosScreen(),
-    const BuySellScreen(),
+    BuySellScreen(),
   ];
 
   @override
@@ -42,6 +43,13 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.add_alert_rounded))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black,
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AddAnnouncements()));
+          },
+          child: Icon(Icons.add)),
       body: Home._pages.elementAt(selectedItemIndex),
       bottomNavigationBar: SizedBox(
         height: 65,

@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../authentication/auth.dart';
+import '../constants/colors.dart';
+import '../utils/header_text.dart';
+import '../utils/user_input_util.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -31,9 +34,6 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  static const Color firstColor = Color(0xFF703EFE);
-  static const Color secondColor = Color(0xFF0A0057);
-
   @override
   void dispose() {
     emailController.dispose();
@@ -44,125 +44,89 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              Theme.of(context).colorScheme.primary.withOpacity(0.5),
-              Theme.of(context).colorScheme.secondary.withOpacity(.9),
-            ])),
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Welcome\nBack !',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50,
                 ),
-              ),
-            ),
-            const SizedBox(height: 80),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: 'Email',
-                hintStyle: TextStyle(
-                  color: Colors.white,
+                Image.asset("assets/logo.png"),
+                SizedBox(
+                  height: 50,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white, width: 1.0),
+
+                Text("Email"),
+                UserInputField(
+                  userField: emailController,
+                  ispass: false,
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                SizedBox(
+                  height: 20,
                 ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+
+                Text("Password"),
+                UserInputField(
+                  userField: passwordController,
+                  ispass: true,
                 ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-                hintStyle: TextStyle(
-                  color: Colors.white,
+                SizedBox(
+                  height: 20,
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white, width: 1.0),
+
+                SizedBox(height: 60),
+                Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: () {
+                      login();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.circular(7.0)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 80.0, vertical: 14),
+                        child: Text(
+                          "Submit",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                SizedBox(
+                  height: 10,
                 ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
-                ),
-              ),
-            ),
-            const SizedBox(height: 40),
-            GestureDetector(
-              onTap: login,
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: secondColor.withOpacity(.9),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
+                // Expanded(child: Text("")),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Already a Member?',
+                      style: TextStyle(
+                        color: Colors.black54,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: widget.showRegisterPage,
+                      child: const Text(
+                        '  Login Instead',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                ),
-                width: MediaQuery.of(context).size.width * 0.6,
-                height: 50.0,
-                // color: Colors.blue,
-                child: const Center(
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: secondColor,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  'Not a Member?',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: widget.showRegisterPage,
-                  child: const Text(
-                    ' Register Now',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

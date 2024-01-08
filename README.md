@@ -1,16 +1,22 @@
 # project_um
 
-A new Flutter project.
+An app for students!
 
-## Getting Started
+When you are out and about, you want to check whether or not 
+the day has a certain class or you can check the notifications
+for the events and projects that are upcoming for me. 
 
-This project is a starting point for a Flutter application.
+You can also, sent out an urgent request to all the app users who
+might be able to help you.
 
-A few resources to get you started if this is your first Flutter project:
+You can also book the auditorium for your custom events.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Used
+- Flutter
+- Firebase
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Description
+This was a project during the last semester in my college.
+I made this for my friends major, and the design was provided by them. 
+While, all the code was written by me. 
+

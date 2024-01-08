@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Announcements extends StatelessWidget {
-  const Announcements({super.key});
+  String title;
+  String content;
+  Announcements({super.key, required this.title, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class Announcements extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "New Announcements",
+              title,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -28,7 +30,7 @@ class Announcements extends StatelessWidget {
               child: SizedBox(
                 width: 150,
                 child: Text(
-                  "This is the new notice so please see it",
+                  content,
                   style: TextStyle(fontSize: 10, color: Colors.white),
                 ),
               ),
